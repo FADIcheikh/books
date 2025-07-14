@@ -90,6 +90,20 @@ brew install --cask frappe-books
     <img width='120' alt='Get it on Flathub' src='https://flathub.org/api/badge?locale=en'/>
 </a>
 
+### Using Docker
+
+A `Dockerfile` is included for running Frappe Books in a container with
+PaddleOCR pre-installed.
+
+```bash
+docker build -t frappe-books .
+docker run -it --rm -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix frappe-books
+```
+
+Windows users can start an X server (e.g. VcXsrv) and double-click
+`scripts\run-container.cmd` to launch the container.
+
 ## Development Setup
 
 ### Pre-requisites

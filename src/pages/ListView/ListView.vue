@@ -182,6 +182,7 @@ export default defineComponent({
 
       try {
         const text = await ocrBuffer(data);
+        console.log('OCR output:', text);
         showToast({ message: text, type: 'success', duration: 'long' });
       } catch (error) {
         console.error(error);

@@ -61,6 +61,7 @@ export async function ocrBuffer(buffer: Buffer): Promise<string> {
     );
 
     const { text } = JSON.parse(stdout) as { text: string };
+    console.log('OCR result:', text);
     return text;
   } catch (error) {
     console.error('PaddleOCR error', error);

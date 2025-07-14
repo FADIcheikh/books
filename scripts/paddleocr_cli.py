@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
-import sys, json
-from paddleocr import PaddleOCR
+import sys
+import json
+
+try:
+    from paddleocr import PaddleOCR
+except Exception as e:
+    print(
+        json.dumps({"error": f"PaddleOCR not installed: {e}"}),
+        file=sys.stderr,
+    )
+    sys.exit(1)
 
 def main():
     if len(sys.argv) < 2:

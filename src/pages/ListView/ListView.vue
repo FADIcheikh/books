@@ -4,6 +4,9 @@
       <Button ref="exportButton" :icon="false" @click="openExportModal = true">
         {{ t`Export` }}
       </Button>
+      <Button ref="importButton" :icon="false" @click="importImage">
+        {{ t`Import` }}
+      </Button>
       <FilterDropdown
         ref="filterDropdown"
         :schema-name="schemaName"
@@ -51,6 +54,8 @@ import Modal from 'src/components/Modal.vue';
 import PageHeader from 'src/components/PageHeader.vue';
 import { fyo } from 'src/initFyo';
 import { shortcutsKey } from 'src/utils/injectionKeys';
+import { ocrBuffer } from 'src/utils/ocr';
+import { showToast } from 'src/utils/interactive';
 import {
   docsPathMap,
   getCreateFiltersFromListViewFilters,
@@ -162,6 +167,26 @@ export default defineComponent({
     },
     applyFilter(filters: QueryFilter) {
       this.list?.updateData(filters);
+    },
+    async importImage() {
+      const { canceled, success, data } = await ipc.selectFile({
+        title: this.t`Select Image`,
+        filters: [
+          { name: 'Images', extensions: ['png', 'jpg', 'jpeg', 'bmp'] },
+        ],
+      });
+
+      if (canceled || !success || !data) {
+        return;
+      }
+
+      try {
+        const text = await ocrBuffer(data);
+        showToast({ message: text, type: 'success', duration: 'long' });
+      } catch (error) {
+        console.error(error);
+        showToast({ message: this.t`Import failed`, type: 'error' });
+      }
     },
   },
 });

@@ -22,6 +22,7 @@ const frappeBooksConfig = {
     { from: 'log_creds.txt', to: '../creds/log_creds.txt' },
     { from: 'translations', to: '../translations' },
     { from: 'templates', to: '../templates' },
+    { from: 'scripts/paddleocr_cli.py', to: '../paddleocr_cli.py' },
   ],
   files: '**',
   extends: null,

@@ -55,6 +55,7 @@ Frappe Books addresses a market gap where small businesses face expensive, compl
   - **Billing**: Billing processes by generating bills and tracking payments.
   - **Payments**: Records and tracks payments received and made.
   - **Journal Entries**: Records financial transactions in the general ledger with detailed notes and adjustments.
+  - **Import via OCR**: Quickly create entries by importing documents and extracting text with [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR).
 - **Financial Reports**
   - **General Ledger**: Centralized record of all financial transactions, providing a comprehensive view of accounts.
   - **Profit and Loss Statement**: Summarizes revenues, costs, and expenses to show business profitability.
@@ -98,6 +99,8 @@ To get the dev environment up and running you need to first set up Node.js `v20.
 
 Next, you will need to install [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable).
 
+If you want to use the optional OCR import feature, make sure you have **Python 3.8+** available on your system.
+
 ### Clone and Run
 
 Once you are through the Pre-requisites, you can run the following commands to
@@ -112,6 +115,9 @@ cd books
 
 # install dependencies
 yarn
+
+# (optional) enable OCR import
+pip install paddleocr
 ```
 
 To run Frappe Books in development mode (with hot reload, etc):

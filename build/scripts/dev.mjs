@@ -123,12 +123,8 @@ async function handleResult(result) {
 }
 
 function runElectron() {
-  const electronProcess = $$`npx electron --inspect=5858 ${path.join(
-    root,
-    'dist_electron',
-    'dev',
-    'main.js'
-  )}`;
+  const electronPath = path.join(root, 'dist_electron', 'dev', 'main.js');
+  const electronProcess = $$`npx electron --inspect=5858 ${electronPath} --no-sandbox`;
 
   electronProcess.on('close', async () => {
     if (isReload) {
